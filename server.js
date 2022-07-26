@@ -19,6 +19,10 @@ io.on('connection', socket =>{
   socket.on('join-room', (roomID,userID)=>{
     socket.join(roomID)
     socket.to(roomID).emit('user-connected',userID)
+
+    socket.on('disonnect',()=>{
+      socket.to(roomID).emit('user-disconnected',userID)
+    })
     //console.log(roomID,userID)
   })
 })
